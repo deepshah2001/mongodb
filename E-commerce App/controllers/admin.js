@@ -1,4 +1,4 @@
-const mongodb = require('mongodb');
+const mongodb = require("mongodb");
 const Product = require("../models/product");
 
 exports.getAddProduct = (req, res, next) => {
@@ -14,7 +14,13 @@ exports.postAddProduct = (req, res, next) => {
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
-  const product = new Product({title: title, price: price, description: description, imageUrl: imageUrl});
+  const product = new Product({
+    title: title,
+    price: price,
+    description: description,
+    imageUrl: imageUrl,
+    userId: req.user,
+  });
   product
     .save()
     .then((result) => {
@@ -55,8 +61,17 @@ exports.postEditProduct = (req, res, next) => {
   const updatedPrice = req.body.price;
   const updatedImageUrl = req.body.imageUrl;
   const updatedDesc = req.body.description;
-  
-  Product.updateOne({_id: prodId}, {title: updatedTitle, price: updatedPrice, description: updatedDesc, imageUrl: updatedImageUrl})
+
+  Product.updateOne(
+    { _id: prodId },
+    {
+      title: updatedTitle,
+      price: updatedPrice,
+      description: updatedDesc,
+      imageUrl: updatedImageUrl,
+      userId: req.user,
+    }
+  )
     .then((result) => {
       console.log("UPDATED PRODUCT!");
       res.redirect("/admin/products");
@@ -66,6 +81,8 @@ exports.postEditProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
   Product.find()
+  // .select("fields you want to select -fields you don't want to select")
+  // .populate("field name for which you want the detailed information")
     .then((products) => {
       res.render("admin/products", {
         prods: products,
@@ -78,7 +95,7 @@ exports.getProducts = (req, res, next) => {
 
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  Product.deleteOne({_id: prodId})
+  Product.deleteOne({ _id: prodId })
     .then((result) => {
       console.log("DESTROYED PRODUCT");
       res.redirect("/admin/products");

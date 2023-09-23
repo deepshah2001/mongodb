@@ -19,13 +19,13 @@ const shopRoutes = require("./routes/shop");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use((req, res, next) => {
-  // User.findUserById("650ca43ac06cf0520a975536")
-  //   .then((user) => {
-  //     req.user = new User(user.name, user.email, user.cart, user._id);
+app.use("/", (req, res, next) => {
+  User.findById("650f4e09f770975670631ce5")
+    .then(user => {
+      req.user = user;
       next();
-    // })
-    // .catch((err) => console.log(err));
+    })
+    .catch(err => console.log(err));
 });
 
 app.use("/admin", adminRoutes);
@@ -38,6 +38,12 @@ mongoose
     "mongodb+srv://shahdeep020:lFQyqwvO9nPG4nuA@cluster0.jgma8wa.mongodb.net/shop?retryWrites=true&w=majority"
   )
   .then(() => {
+    User.findOne().then(user => {
+      if(!user) {
+        const user = new User({name: "Max", email: "max@email.com", cart: {items: []}});
+        user.save();
+      }
+    });
     app.listen(3000);
   })
   .catch((err) => console.log(err));
