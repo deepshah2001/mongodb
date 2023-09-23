@@ -28,6 +28,7 @@ const userSchema = new Schema({
   },
 });
 
+// Adding item or product to the cart
 userSchema.methods.addToCart = function (product) {
   const cartItemIndex = this.cart.items.findIndex(
     (p) => p.productId.toString() === product._id.toString()
@@ -45,7 +46,6 @@ userSchema.methods.addToCart = function (product) {
       quantity: newQuantity,
     });
   }
-
   const updatedCart = { items: updateCartItems };
 
   this.cart = updatedCart;
@@ -53,6 +53,7 @@ userSchema.methods.addToCart = function (product) {
   return this.save();
 };
 
+// Removing or deleting a product or an item from the cart
 userSchema.methods.deleteCartItem = function (productId) {
   const updatedCart = this.cart.items.filter((items) => {
     return items.productId.toString() !== productId.toString();
@@ -64,79 +65,3 @@ userSchema.methods.deleteCartItem = function (productId) {
 };
 
 module.exports = mongoose.model("User", userSchema);
-// const mongodb = require("mongodb");
-// const getDb = require("../util/database").getDb;
-
-// class User {
-//   constructor(name, email, cart, id) {
-//     this.name = name;
-//     this.email = email;
-//     this.cart = cart;
-//     this._id = id;
-//   }
-
-//   save() {
-//     const db = getDb();
-//     return db
-//       .collection("users")
-//       .insertOne(this)
-//       .then((result) => {
-//         console.log(result);
-//       })
-//       .catch((err) => console.log(err));
-//   }
-
-//
-
-//
-
-//
-
-//   getOrder() {
-//     const db = getDb();
-//     return this.getCart()
-//       .then((products) => {
-//         const order = {
-//           items: products,
-//           user: {
-//             _id: new mongodb.ObjectId(this._id),
-//             name: this.name,
-//           },
-//         };
-//         return db.collection("orders").insertOne(order);
-//       })
-//       .then((result) => {
-//         this.cart = { items: [] };
-//         return db
-//           .collection("users")
-//           .updateOne(
-//             { _id: new mongodb.ObjectId(this._id) },
-//             { $set: { cart: { items: [] } } }
-//           );
-//       });
-//   }
-
-//   getOrders() {
-//     const db = getDb();
-
-//     return db
-//       .collection("orders")
-//       .find({ "user._id": new mongodb.ObjectId(this._id) })
-//       .toArray();
-//   }
-
-//   static findUserById(userId) {
-//     const db = getDb();
-//     return db
-//       .collection("users")
-//       .find({ _id: new mongodb.ObjectId(userId) })
-//       .next()
-//       .then((user) => {
-//         console.log(user);
-//         return user;
-//       })
-//       .catch((err) => console.log(err));
-//   }
-// }
-
-//
