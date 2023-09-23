@@ -81,8 +81,8 @@ exports.postEditProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
   Product.find()
-  // .select("fields you want to select -fields you don't want to select")
-  // .populate("field name for which you want the detailed information")
+    // .select("fields you want to select -fields you don't want to select")
+    // .populate("field name for which you want the detailed information")
     .then((products) => {
       res.render("admin/products", {
         prods: products,
