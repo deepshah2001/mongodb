@@ -46,6 +46,7 @@ userSchema.methods.addToCart = function (product) {
       quantity: newQuantity,
     });
   }
+
   const updatedCart = { items: updateCartItems };
 
   this.cart = updatedCart;
@@ -64,4 +65,36 @@ userSchema.methods.deleteCartItem = function (productId) {
   return this.save();
 };
 
+userSchema.methods.clearCart = function () {
+  this.cart = { items: [] };
+  return this.save();
+};
+
 module.exports = mongoose.model("User", userSchema);
+
+//
+
+//   getOrders() {
+//     const db = getDb();
+
+//     return db
+//       .collection("orders")
+//       .find({ "user._id": new mongodb.ObjectId(this._id) })
+//       .toArray();
+//   }
+
+//   static findUserById(userId) {
+//     const db = getDb();
+//     return db
+//       .collection("users")
+//       .find({ _id: new mongodb.ObjectId(userId) })
+//       .next()
+//       .then((user) => {
+//         console.log(user);
+//         return user;
+//       })
+//       .catch((err) => console.log(err));
+//   }
+// }
+
+//
