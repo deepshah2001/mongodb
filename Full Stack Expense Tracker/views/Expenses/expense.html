@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Expenses</title>
+    <link rel="stylesheet" href="expense.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="ledger">
+        <h2>Expense Tracker</h2>
+
+        <form id="expense">
+          <label for="amount">Expense Amount</label>
+          <input type="number" id="amount" />
+          <label for="description">Expense Description</label>
+          <input type="text" id="description" />
+          <label for="category">Category</label>
+          <select name="category" id="category">
+            <option value="food">Food</option>
+            <option value="salary">Salary</option>
+            <option value="fuel">Fuel</option>
+            <option value="movie">Movie</option>
+          </select>
+          <button type="submit" id="submit" class="add">Submit</button>
+          <button type="submit" id="show" class="add" hidden="hidden">
+            Show Leaderboard
+          </button>
+          <button type="submit" id="report" class="add" hidden="hidden">
+            Generate Report
+          </button>
+          <label for="exp_page">Expense Per Page</label>
+          <select name="expense_per_page" id="exp_page">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+          </select>
+        </form>
+      </div>
+      <div class="transaction">
+        <table class="trans" id="expenses">
+          <thead>
+            <tr class="trans" id="expenses_heading">
+              <th>Amount</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+          <tbody class="trans" id="expenses"></tbody>
+        </table>
+        <div id="pagination"></div>
+        <table class="trans" id="leader" hidden="hidden">
+          <thead>
+            <tr class="trans" id="leader_heading">
+              <!-- <th>Rank</th> -->
+              <th>Name</th>
+              <th>Total Amount</th>
+            </tr>
+          </thead>
+          <tbody class="trans" id="leader_body"></tbody>
+        </table>
+      </div>
+    </div>
+    <button type="submit" id="premium">Buy Premium Membership</button>
+    <p id="status"></p>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="expense.js"></script>
+    <script src="premium.js"></script>
+    <script src="leaderboard.js"></script>
+  </body>
+</html>

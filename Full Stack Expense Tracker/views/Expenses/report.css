@@ -1,0 +1,108 @@
+/* Basic Styling Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+}
+
+body {
+  background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+  color: #333;
+  height: 100vh; /* This will ensure the body covers the entire viewport height */
+  display: flex; /* Setting up flexbox */
+  flex-direction: column; /* Stacking children vertically */
+  justify-content: center; /* Centering children vertically */
+  align-items: center; /* Centering children horizontally */
+}
+
+#container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 95%; /* Making sure it doesn't span the entire screen width */
+  margin-bottom: 20px; /* Space between container and button */
+  background-color: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+
+#report-generator {
+  flex: 2; /* report-generator takes up twice the space of list-file */
+  padding: 20px;
+  border-right: 1px solid #e0e0e0; /* Border between report and list */
+}
+
+#list-file {
+  flex: 1;
+  padding: 20px;
+}
+
+h1, h2, h4 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.heading {
+  color: #555;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px; /* Space between tables */
+}
+
+table, th, td {
+  border: 1px solid #e0e0e0;
+}
+
+th, td {
+  padding: 8px 15px;
+  text-align: left;
+}
+
+tfoot {
+  background-color: #f4f4f4;
+}
+
+#button {
+  display: flex;
+  justify-content: center;
+}
+
+#download {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#download:hover {
+  background-color: #0056b3;
+}
+
+ul#list-item {
+  list-style: none;
+}
+
+ul#list-item li a {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+ul#list-item li a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
